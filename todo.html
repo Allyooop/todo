@@ -1,14 +1,32 @@
 <head>
-  <title>todo</title>
+  <title>Todo List</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <div class="container">
+    <header>
+      <h1>Todo List</h1>
+    </header>
 
-  {{> hello}}
+<div class="row">
+  <div clsss="col-md-8">
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="col-md-4">
+  <h3>Title</h3>
+  </div>
+</div>
+
+
+
+  </div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="task">
+  <li>{{text}}</li>
 </template>
