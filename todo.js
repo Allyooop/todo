@@ -21,6 +21,9 @@ if (Meteor.isClient) {
 
       var text = event.target.text.value;
 
+
+      //validation to check if the value is a string
+      //Match returns true if so
       if (Match.test(text, String)){
         Tasks.insert({
           text: text,
@@ -37,4 +40,14 @@ if (Meteor.isClient) {
       return false;
     }
   });
+
+  Template.task.events({
+  "click .toggle-checked": function () {
+    // Set the checked property to the opposite of its current value
+    Tasks.update(this._id, {$set: {checked: ! this.checked}});
+  },
+  "click .delete": function () {
+    Tasks.remove(this._id);
+  }
+});
 }
