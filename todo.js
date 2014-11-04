@@ -1,4 +1,5 @@
 Tasks = new Mongo.Collection("tasks");
+Comments = new Mongo.Collection("comments");
 
 // simple-todos.js
 if (Meteor.isServer) {
@@ -10,8 +11,11 @@ if (Meteor.isClient) {
   Template.body.helpers({
     tasks: function () {
       return Tasks.find({}, {sort: {createdAt: 1}});
-    }
+    },
 
+    comments: function() {
+      return Comments.find();
+    }
 
   });
 
@@ -38,7 +42,23 @@ if (Meteor.isClient) {
 
       // Prevent default form submit
       return false;
-    }
+    },
+
+    "submit .comment": function (event){
+      var name = event.target.name.value;
+      var commentBody = event.target.thingy.value;
+
+      Comments.insert({
+        author: name,
+        comment: commentBody,
+        createdAt: new Date()
+      });
+
+    event.target.name.value = "";
+    event.target.text.value = "";
+
+    return false;
+    }    
   });
 
   Template.task.events({

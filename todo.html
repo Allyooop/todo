@@ -6,9 +6,16 @@
   <div class="container">
     <header>
       <h1>Todo List</h1>
+      <label class="hide-completed">
+        <input type="checkbox" checked="{{hideCompleted}}" />
+        Hide Completed Tasks
+      </label>
+
         <form class="new-task">
           <input type="text" name="text" placeholder="Type to add new tasks" />
         </form>
+
+
     </header>
 
 <div class="row">
@@ -20,8 +27,20 @@
     </ul>
   </div>
 
+          <form class="comment">
+          <input type="text" name="name" placeholder="Name" />
+          <input type="text" name="thingy" placeholder="Comment" />
+          <input type="submit" value="Submit">
+        </form>
+
   <div class="col-md-4">
   <h3>Title</h3>
+
+  {{#each comments}}
+    {{author}}{{comment}}
+    {{/each}}
+
+  
   </div>
 </div>
 
